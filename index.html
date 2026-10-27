@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b55">
+  <title>Votação Grêmio Estudantil</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <img class="school-logo" src="logo-escola.jpeg" alt="Logotipo da EBM Donícia Maria da Costa">
+    <div class="brand-copy">
+      <span class="eyebrow">ELEIÇÃO ESTUDANTIL</span>
+      <h1>Votação Grêmio Estudantil</h1>
+      <p>EBM Donícia Maria da Costa</p>
+    </div>
+    <div class="live-pill"><span class="live-dot"></span><span id="statusLabel">Urna aberta</span></div>
+  </header>
+
+  <nav class="tabs" aria-label="Menu principal">
+    <button class="tab active" id="tabVote" type="button">🗳️ Votar</button>
+    <button class="tab" id="tabClose" type="button">📊 Encerrar votação</button>
+  </nav>
+
+  <main class="page-shell">
+    <section id="voteScreen">
+      <section class="intro">
+        <div>
+          <span class="section-kicker">SUA VOZ, SUA ESCOLHA</span>
+          <h2>Digite o número do candidato.</h2>
+          <p>Confira a foto/nome na tela e confirme seu voto.</p>
+        </div>
+        <div class="ballot-number"><span>URNA</span><strong>2026</strong></div>
+      </section>
+
+      <section class="voting-layout">
+        <div class="ballot-card">
+          <div class="card-heading">
+            <div><span class="small-label">CÉDULA DIGITAL</span><h3>Identificação do candidato</h3></div>
+            <span class="lock-icon">✓</span>
+          </div>
+          <div class="voting-machine">
+            <div class="number-display" aria-live="polite">
+              <span class="display-label">NÚMERO</span>
+              <div id="digitDisplay" class="digits"><span class="digit empty">—</span><span class="digit empty">—</span></div>
+              <p id="candidatePreview">Digite o número usando o teclado.</p>
+            </div>
+            <div class="keypad" aria-label="Teclado numérico">
+              <button type="button" data-digit="1">1</button><button type="button" data-digit="2">2</button><button type="button" data-digit="3">3</button>
+              <button type="button" data-digit="4">4</button><button type="button" data-digit="5">5</button><button type="button" data-digit="6">6</button>
+              <button type="button" data-digit="7">7</button><button type="button" data-digit="8">8</button><button type="button" data-digit="9">9</button>
+              <button type="button" class="key-correct" id="clearDigits">CORRIGE</button><button type="button" data-digit="0">0</button><button type="button" class="key-white" id="blankVote">BRANCO</button>
+            </div>
+            <div class="machine-actions">
+              <button class="button button-quiet" type="button" id="cancelEntry">Limpar</button>
+              <button class="button button-primary" type="button" id="startConfirm">CONFIRMA <span>→</span></button>
+            </div>
+          </div>
+          <p class="privacy-note"><span>ⓘ</span> Depois da confirmação, a urna volta para a tela inicial para o próximo aluno.</p>
+        </div>
+
+        <aside class="side-panel">
+          <div class="urn-illustration" aria-hidden="true">
+            <div class="urn-top"></div><div class="urn-body">
+              <div class="urn-logo">EBM<span>DONÍCIA MARIA<br>DA COSTA</span></div>
+              <div class="urn-screen"><span>VOTO</span><strong>••</strong></div><div class="urn-slot"></div>
+            </div><div class="urn-foot"></div>
+          </div>
+          <span class="section-kicker">ESCOLA</span>
+          <h3>EBM Donícia Maria da Costa</h3>
+          <p>Grêmio estudantil: participação, respeito e cidadania.</p>
+          <div class="side-divider"></div>
+          <div class="candidate-key"><span class="key-chip">11</span><span>Gabriel</span></div>
+          <div class="candidate-key"><span class="key-chip">22</span><span>Matheus</span></div>
+          <div class="candidate-key"><span class="key-chip">33</span><span>Mônica</span></div>
+          <div class="candidate-key"><span class="key-chip">44</span><span>Jennifer</span></div>
+          <p class="tiny-note">Números demonstrativos: podem ser alterados no arquivo script.js.</p>
+        </aside>
+      </section>
+    </section>
+
+    <section id="closeScreen" class="results-card hidden">
+      <div class="results-heading">
+        <div><span class="section-kicker">ENCERRAMENTO</span><h2>Apuração da eleição</h2><p>Confira o total de votos antes de encerrar e gerar o relatório.</p></div>
+        <div class="total-votes"><strong id="totalVotes">0</strong><span>votos computados</span></div>
+      </div>
+      <div id="resultsList" class="results-list"></div>
+      <div id="winnerBanner" class="winner-banner"><span class="winner-icon">★</span><div><strong>Aguardando votos</strong><p>O resultado aparecerá aqui.</p></div></div>
+      <div class="close-actions">
+        <button class="button button-outline" id="refreshResults" type="button">Atualizar apuração</button>
+        <button class="button button-primary" id="endElection" type="button">Encerrar votação</button>
+        <button class="button button-pdf" id="downloadPdf" type="button">Baixar relatório em PDF</button>
+        <button class="button button-danger" id="resetElection" type="button">Reiniciar votação</button>
+      </div>
+      <p class="demo-warning">Atenção: esta versão salva os totais neste navegador. Não há identificação dos eleitores e não existe compartilhamento entre computadores. O encerramento bloqueia novos votos neste navegador. Para eleição oficial, recomenda-se backend PHP, banco de dados e controles de auditoria.</p>
+    </section>
+    <footer>© <span id="year"></span> • EBM Donícia Maria da Costa • Votação do Grêmio Estudantil</footer>
+  </main>
+
+  <dialog id="confirmDialog" class="confirm-dialog">
+    <div class="dialog-symbol">✓</div><h2>Confirma seu voto?</h2><p id="confirmText">Confira o candidato selecionado.</p>
+    <div class="dialog-actions"><button id="cancelVote" class="button button-quiet" type="button">Corrige</button><button id="confirmVote" class="button button-primary" type="button">CONFIRMA</button></div>
+  </dialog>
+  <dialog id="endDialog" class="confirm-dialog">
+    <div class="dialog-symbol">!</div><h2>Encerrar a votação?</h2><p>Depois de encerrar, não será possível registrar novos votos até que a votação seja reiniciada. Gere o PDF para guardar o resultado.</p>
+    <div class="dialog-actions"><button id="cancelEnd" class="button button-quiet" type="button">Voltar</button><button id="confirmEnd" class="button button-danger" type="button">Encerrar agora</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- A biblioteca jsPDF é carregada pela internet para gerar o arquivo PDF. -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

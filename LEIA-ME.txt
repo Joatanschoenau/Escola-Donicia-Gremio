@@ -1,0 +1,37 @@
+VOTAÇÃO GRÊMIO ESTUDANTIL — EBM DONÍCIA MARIA DA COSTA (VERSÃO URNA VIRTUAL)
+
+Arquivos:
+- index.html: telas da urna, menu Votar/Encerrar e caixa de confirmação
+- style.css: aparência responsiva para computador, tablet e celular
+- script.js: teclado numérico, registro de votos, encerramento e geração de PDF
+- logo-escola.jpeg: logotipo fornecido da escola, exibido ao lado do título no cabeçalho
+
+COMO RODAR NO XAMPP:
+1. Extraia a pasta votacao_gremio_estudantil.
+2. Copie para C:\xampp\htdocs\
+3. Inicie Apache no XAMPP.
+4. Acesse http://localhost/votacao_gremio_estudantil/
+
+NÚMEROS DOS CANDIDATOS:
+11 — Gabriel
+22 — Matheus
+33 — Mônica
+44 — Jennifer
+Os números ficam no array CANDIDATES, no começo de script.js.
+
+FLUXO:
+1. Aluno digita o número no teclado virtual.
+2. A urna mostra o nome e pede confirmação.
+3. Ao confirmar, soma um voto e volta à tela inicial para o próximo aluno.
+4. Na aba "Encerrar votação", confira os totais e encerre.
+5. Após encerrar, use "Baixar relatório em PDF". O PDF inclui total por candidato, votos em branco, percentuais e resultado/empate.
+6. "Reiniciar votação" apaga os votos deste navegador e reabre a urna.
+
+PDF:
+A geração do PDF usa jsPDF carregado por CDN; é necessário estar conectado à internet ao gerar o relatório.
+
+IMPORTANTE:
+Esta é uma demonstração escolar local. Os votos ficam no navegador (localStorage), não são compartilhados entre computadores e podem ser manipulados por quem tem acesso ao dispositivo. O sistema não autentica estudantes. Para uma eleição oficial, use servidor PHP, banco de dados, controles de acesso e auditoria.
+
+LOGOTIPO DA ESCOLA:
+A imagem oficial enviada foi incluída como logo-escola.jpeg e aparece ao lado do título no cabeçalho. Mantenha esse arquivo na mesma pasta de index.html.
